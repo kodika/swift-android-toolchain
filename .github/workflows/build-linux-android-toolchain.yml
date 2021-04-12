@@ -5,13 +5,13 @@ on:
   # but only for the master branch
   push:
     branches:
-      - master
+      - swift-android-5.4-branch
   pull_request:
     branches:
-      - master
+      - swift-android-5.4-branch
 
 jobs:
-  build:
+  build-swift-arm-64:
 
     runs-on: ubuntu-20.04
     
@@ -28,10 +28,61 @@ jobs:
     - name: Clone Swift
       run: ./build/Linux/020-clone-swift.sh
     - name: Build Swift
-      run: ./build/Linux/030-build-swift.sh
-    - name: Build Foundation dependencies
-      run: ./build/Linux/040-build-foundation-depends.sh
-    - name: Build Core libs
-      run: ./build/Linux/050-build-corelibs.sh
-    - name: Collect
-      run: ./build/Linux/060-collect.sh
+      run: ./build/Linux/031-build-swift-arm64.sh
+
+  build-swift-arm:
+
+    runs-on: ubuntu-20.04
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: ./vagrant/provision/010_install_dependencies.sh
+    - name: Install NDK
+      run: ./vagrant/provision/020_install_ndk.sh
+    - name: Define build folders
+      run: ./vagrant/provision/030_define_build_folders.sh
+    - name: Build ICU
+      run: ./build/Linux/010-build-icu.sh
+    - name: Clone Swift
+      run: ./build/Linux/020-clone-swift.sh
+    - name: Build Swift
+      run: ./build/Linux/032-build-swift-arm.sh
+
+  build-swift-x86:
+
+    runs-on: ubuntu-20.04
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: ./vagrant/provision/010_install_dependencies.sh
+    - name: Install NDK
+      run: ./vagrant/provision/020_install_ndk.sh
+    - name: Define build folders
+      run: ./vagrant/provision/030_define_build_folders.sh
+    - name: Build ICU
+      run: ./build/Linux/010-build-icu.sh
+    - name: Clone Swift
+      run: ./build/Linux/020-clone-swift.sh
+    - name: Build Swift
+      run: ./build/Linux/033-build-swift-x86.sh
+
+  build-swift-x86_64:
+
+    runs-on: ubuntu-20.04
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: ./vagrant/provision/010_install_dependencies.sh
+    - name: Install NDK
+      run: ./vagrant/provision/020_install_ndk.sh
+    - name: Define build folders
+      run: ./vagrant/provision/030_define_build_folders.sh
+    - name: Build ICU
+      run: ./build/Linux/010-build-icu.sh
+    - name: Clone Swift
+      run: ./build/Linux/020-clone-swift.sh
+    - name: Build Swift
+      run: ./build/Linux/034-build-swift-x86_64.sh
