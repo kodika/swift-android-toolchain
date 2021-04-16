@@ -1,8 +1,8 @@
 #!/bin/bash
 
-sudo apt-get -y update
+apt-get -y update
 
-sudo apt-get install -y      \
+apt-get install -y      \
   clang                 \
   cmake                 \
   git                   \
@@ -27,11 +27,11 @@ sudo apt-get install -y      \
   tzdata                \
   uuid-dev
 
-sudo snap install sccache --candidate --classic
+snap install sccache --candidate --classic
 
-sudo apt-get install -y \
+apt-get install -y \
     autoconf automake libtool curl wget unzip vim rpl python3-pip
 
-sudo pip3 install --upgrade cmake==3.18.4
+pip3 install --upgrade cmake==3.18.4
 
-sudo ln -s /usr/bin/perl /usr/local/bin/perl
+ln -s /usr/bin/perl /usr/local/bin/perl
