@@ -17,10 +17,8 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-    - name: Restore python2
-      run: sudo ./github-actions/010_restore_python_2.sh
     - name: Install dependencies
-      run: sudo ./vagrant/provision/010_install_dependencies.sh
+      run: sudo ./github-actions/010_install_dependencies.sh
     - name: Install NDK
       run: ./vagrant/provision/020_install_ndk.sh
     - name: Define build folders
@@ -38,10 +36,8 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-    - name: Restore python2
-      run: sudo ./github-actions/010_restore_python_2.sh
     - name: Install dependencies
-      run: sudo ./vagrant/provision/010_install_dependencies.sh
+      run: sudo ./github-actions/010_install_dependencies.sh
     - name: Install NDK
       run: ./vagrant/provision/020_install_ndk.sh
     - name: Define build folders
@@ -59,10 +55,8 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-    - name: Restore python2
-      run: sudo ./github-actions/010_restore_python_2.sh
     - name: Install dependencies
-      run: sudo ./vagrant/provision/010_install_dependencies.sh
+      run: sudo ./github-actions/010_install_dependencies.sh
     - name: Install NDK
       run: ./vagrant/provision/020_install_ndk.sh
     - name: Define build folders
@@ -80,10 +74,8 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-    - name: Restore python2
-      run: sudo ./github-actions/010_restore_python_2.sh
     - name: Install dependencies
-      run: sudo ./vagrant/provision/010_install_dependencies.sh
+      run: sudo ./github-actions/010_install_dependencies.sh
     - name: Install NDK
       run: ./vagrant/provision/020_install_ndk.sh
     - name: Define build folders
