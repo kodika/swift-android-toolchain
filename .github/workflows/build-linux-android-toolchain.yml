@@ -11,21 +11,21 @@ on:
       - swift-android-5.4-branch
 
 jobs:
-  build-swift-arm-64:
+
+  build-icu:
 
     runs-on: ubuntu-20.04
-    
     steps:
     - uses: actions/checkout@v1
     - name: Install dependencies
       run: sudo ./github-actions/010_install_dependencies.sh
     - name: Install NDK
-      run: ./vagrant/provision/020_install_ndk.sh
+      run: ./github-actions/020_install_ndk_16b.sh
     - name: Define build folders
       run: ./vagrant/provision/030_define_build_folders.sh
     - name: Build ICU
       run: ./build/Linux/010-build-icu.sh
-    - name: Clone Swift
-      run: ./build/Linux/020-clone-swift.sh
-    - name: Build Swift
-      run: ./build/Linux/031-build-swift-arm64.sh
+    - uses: actions/upload-artifact@v2
+      with:
+        name: icu-arm64-v8a
+        path: /home/runner/libiconv-libicu-android/icu-arm64-v8a
