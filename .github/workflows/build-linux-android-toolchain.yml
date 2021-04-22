@@ -43,7 +43,7 @@ jobs:
           /home/runner/libiconv-libicu-android/arm64-v8a
           !/home/runner/libiconv-libicu-android/arm64-v8a/icu
           !/home/runner/libiconv-libicu-android/arm64-v8a/android_support
-          /home/runner/libiconv-libicu-android/arm64-v8a/icu/**/*.h
+          /home/runner/libiconv-libicu-android/arm64-v8a/icu/**/unicode/*.h
     - uses: actions/upload-artifact@v2
       with:
         name: icu-armeabi-v7a
@@ -51,7 +51,7 @@ jobs:
           /home/runner/libiconv-libicu-android/armeabi-v7a
           !/home/runner/libiconv-libicu-android/armeabi-v7a/icu
           !/home/runner/libiconv-libicu-android/armeabi-v7a/android_support
-          /home/runner/libiconv-libicu-android/armeabi-v7a/icu/**/*.h
+          /home/runner/libiconv-libicu-android/armeabi-v7a/icu/**/unicode/*.h
     - uses: actions/upload-artifact@v2
       with:
         name: icu-x86_64
@@ -59,7 +59,7 @@ jobs:
           /home/runner/libiconv-libicu-android/x86_64
           !/home/runner/libiconv-libicu-android/x86_64/icu
           !/home/runner/libiconv-libicu-android/x86_64/android_support
-          /home/runner/libiconv-libicu-android/x86_64/icu/**/*.h
+          /home/runner/libiconv-libicu-android/x86_64/icu/**/unicode/*.h
     - uses: actions/upload-artifact@v2
       with:
         name: icu-x86
@@ -67,4 +67,4 @@ jobs:
           /home/runner/libiconv-libicu-android/x86
           !/home/runner/libiconv-libicu-android/x86/icu
           !/home/runner/libiconv-libicu-android/x86/android_support
-          /home/runner/libiconv-libicu-android/x86/icu/**/*.h
+          /home/runner/libiconv-libicu-android/x86/icu/**/unicode/*.h
