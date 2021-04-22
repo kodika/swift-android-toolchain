@@ -13,8 +13,8 @@ on:
 jobs:
 
   build-icu:
-
     runs-on: ubuntu-20.04
+
     steps:
     - uses: actions/checkout@v1
     - name: Install dependencies
@@ -54,3 +54,26 @@ jobs:
       with:
         name: icu-x86
         path: /home/runner/libiconv-libicu-android/x86/icu-x86.zip
+
+  build-swift-arm-64:
+    needs: build-icu
+    runs-on: ubuntu-20.04
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: sudo ./github-actions/010_install_dependencies.sh
+    - name: Install NDK
+      run: ./vagrant/provision/020_install_ndk.sh
+    - name: Define build folders
+      run: ./vagrant/provision/030_define_build_folders.sh
+    - uses: actions/download-artifact@v2
+      with:
+        name: icu-arm64-v8a
+        path: /home/runner/libiconv-libicu-android/arm64-v8a/
+    - name: Prepare ICU
+      run: ./github-actions/010-build-icu-unzip-artifacts.sh arm64-v8a
+    - name: Clone Swift
+      run: ./build/Linux/020-clone-swift.sh
+    - name: Build Swift
+      run: ./build/Linux/031-build-swift-arm64.sh
