@@ -23,7 +23,18 @@ jobs:
       run: ./github-actions/020_install_ndk_16b.sh
     - name: Define build folders
       run: ./vagrant/provision/030_define_build_folders.sh
+    - name: Cache ICU
+      id: cache-icu
+      uses: actions/cache@v2
+      with:
+        path: |
+          /home/runner/libiconv-libicu-android/arm64-v8a
+          /home/runner/libiconv-libicu-android/armeabi-v7a
+          /home/runner/libiconv-libicu-android/x86_64
+          /home/runner/libiconv-libicu-android/x86
+        key: ${{ runner.os }}-ee2cf7f
     - name: Build ICU
+      if: steps.cache-icu.outputs.cache-hit != 'true'
       run: ./build/Linux/010-build-icu.sh
     - name: Prepare artifacts
       run: ./github-actions/010-build-icu-prepare-artifacts.sh
@@ -31,3 +42,15 @@ jobs:
       with:
         name: icu-arm64-v8a
         path: /home/runner/libiconv-libicu-android/arm64-v8a/icu-arm64-v8a.zip
+    - uses: actions/upload-artifact@v2
+      with:
+        name: icu-armeabi-v7a
+        path: /home/runner/libiconv-libicu-android/armeabi-v7a/icu-armeabi-v7a.zip
+    - uses: actions/upload-artifact@v2
+      with:
+        name: icu-x86_64
+        path: /home/runner/libiconv-libicu-android/x86_64/icu-x86_64.zip
+    - uses: actions/upload-artifact@v2
+      with:
+        name: icu-x86
+        path: /home/runner/libiconv-libicu-android/x86/icu-x86.zip
