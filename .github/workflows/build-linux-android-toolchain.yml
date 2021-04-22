@@ -43,7 +43,7 @@ jobs:
           /home/runner/libiconv-libicu-android/arm64-v8a
           !/home/runner/libiconv-libicu-android/arm64-v8a/icu
           !/home/runner/libiconv-libicu-android/arm64-v8a/android_support
-          /home/runner/libiconv-libicu-android/arm64-v8a/icu/**/unicode/*.h
+          /home/runner/libiconv-libicu-android/arm64-v8a/icu/**/*.h
     - uses: actions/upload-artifact@v2
       with:
         name: icu-armeabi-v7a
@@ -51,7 +51,7 @@ jobs:
           /home/runner/libiconv-libicu-android/armeabi-v7a
           !/home/runner/libiconv-libicu-android/armeabi-v7a/icu
           !/home/runner/libiconv-libicu-android/armeabi-v7a/android_support
-          /home/runner/libiconv-libicu-android/armeabi-v7a/icu/**/unicode/*.h
+          /home/runner/libiconv-libicu-android/armeabi-v7a/icu/**/*.h
     - uses: actions/upload-artifact@v2
       with:
         name: icu-x86_64
@@ -59,7 +59,7 @@ jobs:
           /home/runner/libiconv-libicu-android/x86_64
           !/home/runner/libiconv-libicu-android/x86_64/icu
           !/home/runner/libiconv-libicu-android/x86_64/android_support
-          /home/runner/libiconv-libicu-android/x86_64/icu/**/unicode/*.h
+          /home/runner/libiconv-libicu-android/x86_64/icu/**/*.h
     - uses: actions/upload-artifact@v2
       with:
         name: icu-x86
@@ -67,4 +67,26 @@ jobs:
           /home/runner/libiconv-libicu-android/x86
           !/home/runner/libiconv-libicu-android/x86/icu
           !/home/runner/libiconv-libicu-android/x86/android_support
-          /home/runner/libiconv-libicu-android/x86/icu/**/unicode/*.h
+          /home/runner/libiconv-libicu-android/x86/icu/**/*.h
+
+
+  build-swift-arm-64:
+    needs: build-icu
+    runs-on: ubuntu-20.04
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: sudo ./github-actions/010_install_dependencies.sh
+    - name: Install NDK
+      run: ./github-actions/020_install_ndk_21e.sh
+    - name: Define build folders
+      run: ./vagrant/provision/030_define_build_folders.sh
+    - uses: actions/download-artifact@v2
+      with:
+        name: icu-arm64-v8a
+        path: /home/runner/libiconv-libicu-android/arm64-v8a
+    - name: Clone Swift
+      run: ./build/Linux/020-clone-swift.sh
+    - name: Build Swift
+      run: ./build/Linux/031-build-swift-arm64.sh
