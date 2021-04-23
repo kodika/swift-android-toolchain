@@ -101,3 +101,102 @@ jobs:
       with:
         name: swift-nightly-install-arm64-v8a
         path: /home/runner/out/swift-android-5.4
+
+
+  build-swift-armeabi-v7a:
+    needs: build-icu
+    runs-on: ubuntu-20.04
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: sudo ./github-actions/010_install_dependencies.sh
+    - name: Install NDK
+      run: ./github-actions/020_install_ndk_21e.sh
+    - name: Define build folders
+      run: ./vagrant/provision/030_define_build_folders.sh
+    - uses: actions/download-artifact@v2
+      with:
+        name: icu-armeabi-v7a
+        path: /home/runner/libiconv-libicu-android/armeabi-v7a
+    - name: Clone Swift
+      run: ./build/Linux/020-clone-swift.sh
+    - name: Cache Swift Arm 32
+      id: cache-swift-arm-32
+      uses: actions/cache@v2
+      with:
+        path: /home/runner/out/swift-android-5.4
+        key: ${{ runner.os }}-arm32-e1e3863
+    - name: Build Swift
+      if: steps.cache-swift-arm-32.outputs.cache-hit != 'true'
+      run: ./build/Linux/032-build-swift-arm.sh
+    - uses: actions/upload-artifact@v2
+      with:
+        name: swift-nightly-install-armeabi-v7a
+        path: /home/runner/out/swift-android-5.4
+
+
+  build-swift-x86:
+    needs: build-icu
+    runs-on: ubuntu-20.04
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: sudo ./github-actions/010_install_dependencies.sh
+    - name: Install NDK
+      run: ./github-actions/020_install_ndk_21e.sh
+    - name: Define build folders
+      run: ./vagrant/provision/030_define_build_folders.sh
+    - uses: actions/download-artifact@v2
+      with:
+        name: icu-x86
+        path: /home/runner/libiconv-libicu-android/x86
+    - name: Clone Swift
+      run: ./build/Linux/020-clone-swift.sh
+    - name: Cache Swift x86
+      id: cache-swift-x86
+      uses: actions/cache@v2
+      with:
+        path: /home/runner/out/swift-android-5.4
+        key: ${{ runner.os }}-x86-e1e3863
+    - name: Build Swift
+      if: steps.cache-swift-x86.outputs.cache-hit != 'true'
+      run: ./build/Linux/034-build-swift-x86.sh
+    - uses: actions/upload-artifact@v2
+      with:
+        name: swift-nightly-install-x86
+        path: /home/runner/out/swift-android-5.4
+
+
+  build-swift-x86_64:
+    needs: build-icu
+    runs-on: ubuntu-20.04
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: sudo ./github-actions/010_install_dependencies.sh
+    - name: Install NDK
+      run: ./github-actions/020_install_ndk_21e.sh
+    - name: Define build folders
+      run: ./vagrant/provision/030_define_build_folders.sh
+    - uses: actions/download-artifact@v2
+      with:
+        name: icu-x86_64
+        path: /home/runner/libiconv-libicu-android/x86_64
+    - name: Clone Swift
+      run: ./build/Linux/020-clone-swift.sh
+    - name: Cache Swift x86_64
+      id: cache-swift-x86_64
+      uses: actions/cache@v2
+      with:
+        path: /home/runner/out/swift-android-5.4
+        key: ${{ runner.os }}-x86_64-e1e3863
+    - name: Build Swift
+      if: steps.cache-swift-x86_64.outputs.cache-hit != 'true'
+      run: ./build/Linux/033-build-swift-x86_64.sh
+    - uses: actions/upload-artifact@v2
+      with:
+        name: swift-nightly-install-x86_64
+        path: /home/runner/out/swift-android-5.4
