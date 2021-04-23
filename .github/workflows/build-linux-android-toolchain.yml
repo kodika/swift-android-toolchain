@@ -88,5 +88,16 @@ jobs:
         path: /home/runner/libiconv-libicu-android/arm64-v8a
     - name: Clone Swift
       run: ./build/Linux/020-clone-swift.sh
+    - name: Cache Swift Arm64
+      id: cache-swift-arm-64
+      uses: actions/cache@v2
+      with:
+        path: /home/runner/out/swift-android-5.4
+        key: ${{ runner.os }}-arm64-e1e3863
     - name: Build Swift
+      if: steps.cache-swift-arm-64.outputs.cache-hit != 'true'
       run: ./build/Linux/031-build-swift-arm64.sh
+    - uses: actions/upload-artifact@v2
+      with:
+        name: swift-arm64-v8a
+        path: /home/runner/out/swift-android-5.4/swift-nightly-install
