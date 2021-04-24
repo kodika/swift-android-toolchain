@@ -213,18 +213,7 @@ jobs:
       run: ./github-actions/020_install_ndk_21e.sh
     - name: Define build folders
       run: ./vagrant/provision/030_define_build_folders.sh
-    - name: Cache foundation dependencies
-      id: cache-foundation-dependencies
-      uses: actions/cache@v2
-      with:
-        path: |
-          ~/foundation-dependencies/arm64
-          ~/foundation-dependencies/arm
-          ~/foundation-dependencies/x86_64
-          ~/foundation-dependencies/x86
-        key: openssl-1.0.2u-curl-7_76_0-libxmlv2.9.10
     - name: Build Foundation Dependenncies
-      if: steps.cache-foundation-dependencies.outputs.cache-hit != 'true'
       run: ./build/Linux/040-build-foundation-depends.sh
     - uses: actions/upload-artifact@v2
       with:
