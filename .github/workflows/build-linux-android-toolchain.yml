@@ -200,3 +200,18 @@ jobs:
       with:
         name: swift-nightly-install-x86_64
         path: /home/runner/out/swift-android-5.4
+
+
+  build-foundation-dependecies:
+    runs-on: ubuntu-20.04
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: sudo ./github-actions/010_install_dependencies.sh
+    - name: Install NDK
+      run: ./github-actions/020_install_ndk_21e.sh
+    - name: Define build folders
+      run: ./vagrant/provision/030_define_build_folders.sh
+    - name: Build Foundation Dependenncies
+      run: ./build/Linux/040-build-foundation-depends.sh
