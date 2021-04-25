@@ -25,8 +25,6 @@ apt-get install -y      \
   tzdata                \
   uuid-dev
 
-snap install sccache --candidate --classic
-
 apt-get install -y \
     autoconf automake libtool curl wget unzip vim rpl python3-pip
 
