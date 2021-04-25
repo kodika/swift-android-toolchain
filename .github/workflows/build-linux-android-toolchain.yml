@@ -253,7 +253,9 @@ jobs:
 
 
   build-swift-corelibs-arm-64:
-    needs: build-icu build-swift-arm-64 build-foundation-dependecies
+    needs: build-icu
+    needs: build-swift-arm-64
+    needs: build-foundation-dependecies
     runs-on: ubuntu-20.04
     
     steps:
