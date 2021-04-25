@@ -1,7 +1,7 @@
 #!/bin/bash
 set -ex
 
-archesToBuild = $1
+archesToBuild=$1
 
 source $HOME/.build_env
 function finish {
