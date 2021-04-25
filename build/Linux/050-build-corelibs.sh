@@ -1,6 +1,8 @@
 #!/bin/bash
 set -ex
 
+archesToBuild = $1
+
 source $HOME/.build_env
 function finish {
     exit_code=$?
@@ -20,7 +22,7 @@ abis=(["arm64"]="arm64-v8a" ["arm"]="armeabi-v7a" ["x86_64"]="x86_64" ["x86"]="x
 
 $self_dir/051-uninstall-corelibs.sh
 
-for arch in "${!swift_archs[@]}"
+for arch in archesToBuild
 do
     swift_arch=${swift_archs[$arch]}
     abi=${abis[$arch]}
@@ -92,7 +94,7 @@ do
     popd
 done
 
-for arch in "${!swift_archs[@]}"
+for arch in archesToBuild
 do
     swift_arch=${swift_archs[$arch]}
 

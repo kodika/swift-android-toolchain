@@ -11,7 +11,7 @@ pushd $BASE_DIR/vagrant
     vagrant ssh -c /vagrant/scripts/020-clone-swift.sh
     vagrant ssh -c /vagrant/scripts/030-build-swift.sh
     vagrant ssh -c /vagrant/scripts/040-build-foundation-depends.sh
-    vagrant ssh -c /vagrant/scripts/050-build-corelibs.sh
+    vagrant ssh -c /vagrant/scripts/050-build-corelibs.sh "arm64 arm x86_64 x86"
     vagrant ssh -c /vagrant/scripts/060-collect.sh
 
     vagrant halt

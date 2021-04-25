@@ -250,3 +250,33 @@ jobs:
         path: |
           ~/foundation-dependencies/x86
           !~/foundation-dependencies/x86/src
+
+
+  build-swift-corelibs-arm-64:
+    needs: build-icu build-swift-arm-64 build-foundation-dependecies
+    runs-on: ubuntu-20.04
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: sudo ./github-actions/010_install_dependencies.sh
+    - name: Install NDK
+      run: ./github-actions/020_install_ndk_21e.sh
+    - name: Define build folders
+      run: ./vagrant/provision/030_define_build_folders.sh
+    - uses: actions/download-artifact@v2
+      with:
+        name: icu-arm64-v8a
+        path: ~/libiconv-libicu-android/arm64-v8a
+    - uses: actions/download-artifact@v2
+      with:
+        name: swift-nightly-install-arm64-v8a
+        path: ~/out/swift-android-5.4
+    - uses: actions/download-artifact@v2
+      with:
+        name: foundation-dependecies-arm64-v8a
+        path: ~/foundation-dependencies/arm64
+    - name: Clone Swift
+      run: ./build/Linux/020-clone-swift.sh
+    - name: Build Corelibs
+      run: ./build/Linux/050-build-corelibs.sh arm64
