@@ -1,6 +1,5 @@
 #!/bin/bash
-
-apt-get -y update
+set -ex
 
 apt-get install -y      \
   clang                 \
