@@ -12,7 +12,6 @@ apt-get install -y      \
   libedit-dev           \
   libicu-dev            \
   libncurses5-dev       \
-  libpython-dev         \
   libpython3-dev        \
   libsqlite3-dev        \
   libxml2-dev           \
