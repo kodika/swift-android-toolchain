@@ -97,10 +97,12 @@ jobs:
     - name: Build Swift
       if: steps.cache-swift-arm-64.outputs.cache-hit != 'true'
       run: ./build/Linux/031-build-swift-arm64.sh
+    - name: Archive toolchain
+      run: tar -czvf swift-android-5.4-arm64-v8a.tar.gz /home/runner/out/swift-android-5.4 
     - uses: actions/upload-artifact@v2
       with:
-        name: swift-nightly-install-arm64-v8a
-        path: /home/runner/out/swift-android-5.4
+        name: swift-android-5.4-arm64-v8a
+        path: swift-android-5.4-arm64-v8a.tar.gz
 
 
   build-swift-armeabi-v7a:
@@ -130,10 +132,12 @@ jobs:
     - name: Build Swift
       if: steps.cache-swift-arm-32.outputs.cache-hit != 'true'
       run: ./build/Linux/032-build-swift-arm.sh
+    - name: Archive toolchain
+      run: tar -czvf swift-android-5.4-armeabi-v7a.tar.gz /home/runner/out/swift-android-5.4 
     - uses: actions/upload-artifact@v2
       with:
-        name: swift-nightly-install-armeabi-v7a
-        path: /home/runner/out/swift-android-5.4
+        name: swift-android-5.4-armeabi-v7a
+        path: swift-android-5.4-armeabi-v7a.tar.gz
 
 
   build-swift-x86:
@@ -163,10 +167,12 @@ jobs:
     - name: Build Swift
       if: steps.cache-swift-x86.outputs.cache-hit != 'true'
       run: ./build/Linux/034-build-swift-x86.sh
+    - name: Archive toolchain
+      run: tar -czvf swift-android-5.4-x86.tar.gz /home/runner/out/swift-android-5.4 
     - uses: actions/upload-artifact@v2
       with:
-        name: swift-nightly-install-x86
-        path: /home/runner/out/swift-android-5.4
+        name: swift-android-5.4-x86
+        path: swift-android-5.4-x86.tar.gz
 
 
   build-swift-x86_64:
@@ -196,10 +202,12 @@ jobs:
     - name: Build Swift
       if: steps.cache-swift-x86_64.outputs.cache-hit != 'true'
       run: ./build/Linux/033-build-swift-x86_64.sh
+    - name: Archive toolchain
+      run: tar -czvf swift-android-5.4-x86_64.tar.gz /home/runner/out/swift-android-5.4 
     - uses: actions/upload-artifact@v2
       with:
-        name: swift-nightly-install-x86_64
-        path: /home/runner/out/swift-android-5.4
+        name: swift-android-5.4-x86_64
+        path: swift-android-5.4-x86_64.tar.gz
 
 
   build-foundation-dependecies:
@@ -270,8 +278,9 @@ jobs:
         path: ~/libiconv-libicu-android/arm64-v8a
     - uses: actions/download-artifact@v2
       with:
-        name: swift-nightly-install-arm64-v8a
-        path: ~/out/swift-android-5.4
+        name: swift-android-5.4-arm64-v8a
+    - name: Unarchive toolchain
+      run: tar -czvf swift-android-5.4-arm64-v8a.tar.gz ~/out/swift-android-5.4 
     - uses: actions/download-artifact@v2
       with:
         name: foundation-dependecies-arm64-v8a
