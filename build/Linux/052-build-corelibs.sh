@@ -59,7 +59,7 @@ pushd $foundation_build_dir
         -DICU_I18N_LIBRARY_RELEASE=$icu_libs/libicui18nswift.so \
         \
         -DCURL_LIBRARY=$foundation_dependencies/lib/libcurl.so \
-        -DCURL_INCLUDE_DIR=$foundation_dependencies/include/curl \
+        -DCURL_INCLUDE_DIR=$foundation_dependencies/include \
         \
         -DLIBXML2_LIBRARY=$foundation_dependencies/lib/libxml2.so \
         -DLIBXML2_INCLUDE_DIR=$foundation_dependencies/include/libxml2 \
