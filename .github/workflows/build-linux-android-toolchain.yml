@@ -333,3 +333,77 @@ jobs:
       with:
         name: swift-android-5.4-armeabi-v7a-with-corelibs
         path: ~/out/swift-android-5.4-armeabi-v7a-with-corelibs.tar
+
+  build-swift-corelibs-x86:
+    needs: [build-icu, build-swift-x86, build-foundation-dependecies]
+    runs-on: ubuntu-20.04
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: sudo ./github-actions/010_install_dependencies.sh
+    - name: Install NDK
+      run: ./github-actions/020_install_ndk_21e.sh
+    - name: Define build folders
+      run: ./vagrant/provision/030_define_build_folders.sh
+    - uses: actions/download-artifact@v2
+      with:
+        name: icu-x86
+        path: ~/libiconv-libicu-android/x86
+    - uses: actions/download-artifact@v2
+      with:
+        name: swift-android-5.4-x86
+        path: ~/out
+    - name: Unarchive toolchain
+      run: pushd ~/out; tar -xvf swift-android-5.4-x86.tar; popd
+    - uses: actions/download-artifact@v2
+      with:
+        name: foundation-dependecies-x86
+        path: ~/foundation-dependencies/x86
+    - name: Clone Swift
+      run: ./build/Linux/020-clone-swift.sh
+    - name: Build Corelibs
+      run: ./build/Linux/052-build-corelibs.sh x86 i686 x86
+    - name: Archive toolchain
+      run: pushd ~/out; tar -cvf swift-android-5.4-x86-with-corelibs.tar swift-android-5.4; popd
+    - uses: actions/upload-artifact@v2
+      with:
+        name: swift-android-5.4-x86-with-corelibs
+        path: ~/out/swift-android-5.4-x86-with-corelibs.tar
+
+  build-swift-corelibs-x86_64:
+    needs: [build-icu, build-swift-x86_64, build-foundation-dependecies]
+    runs-on: ubuntu-20.04
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: sudo ./github-actions/010_install_dependencies.sh
+    - name: Install NDK
+      run: ./github-actions/020_install_ndk_21e.sh
+    - name: Define build folders
+      run: ./vagrant/provision/030_define_build_folders.sh
+    - uses: actions/download-artifact@v2
+      with:
+        name: icu-x86_64
+        path: ~/libiconv-libicu-android/x86_64
+    - uses: actions/download-artifact@v2
+      with:
+        name: swift-android-5.4-x86_64
+        path: ~/out
+    - name: Unarchive toolchain
+      run: pushd ~/out; tar -xvf swift-android-5.4-x86_64.tar; popd
+    - uses: actions/download-artifact@v2
+      with:
+        name: foundation-dependecies-x86_64
+        path: ~/foundation-dependencies/x86_64
+    - name: Clone Swift
+      run: ./build/Linux/020-clone-swift.sh
+    - name: Build Corelibs
+      run: ./build/Linux/052-build-corelibs.sh x86_64 x86_64 x86_64
+    - name: Archive toolchain
+      run: pushd ~/out; tar -cvf swift-android-5.4-x86_64-with-corelibs.tar swift-android-5.4; popd
+    - uses: actions/upload-artifact@v2
+      with:
+        name: swift-android-5.4-x86_64-with-corelibs
+        path: ~/out/swift-android-5.4-x86_64-with-corelibs.tar
