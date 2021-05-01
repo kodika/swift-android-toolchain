@@ -407,3 +407,20 @@ jobs:
       with:
         name: swift-android-5.4-x86_64-with-corelibs
         path: ~/out/swift-android-5.4-x86_64-with-corelibs.tar
+
+  build-swift-mac:
+    runs-on: macos-11.0
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: sudo ./github-actions/010_install_dependencies.sh
+    - name: Install NDK
+      run: ./github-actions/020_install_ndk_21e.sh
+    - name: Install Cmake and Ninja
+      run: brew install cmake ninja pkg-config
+    - name: Define build folders
+      run: ./vagrant/provision/030_define_build_folders.sh
+    - name: Clone Swift
+      run: ./build/Linux/020-clone-swift.sh
+
