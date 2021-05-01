@@ -290,3 +290,46 @@ jobs:
       run: ./build/Linux/020-clone-swift.sh
     - name: Build Corelibs
       run: ./build/Linux/052-build-corelibs.sh arm64 aarch64 arm64-v8a
+    - name: Archive toolchain
+      run: pushd ~/out; tar -cvf swift-android-5.4-arm64-v8a-with-corelibs.tar swift-android-5.4; popd
+    - uses: actions/upload-artifact@v2
+      with:
+        name: swift-android-5.4-arm64-v8a-with-corelibs
+        path: ~/out/swift-android-5.4-arm64-v8a-with-corelibs.tar
+
+  build-swift-corelibs-armeabi-v7a:
+    needs: [build-icu, build-swift-armeabi-v7a, build-foundation-dependecies]
+    runs-on: ubuntu-20.04
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: sudo ./github-actions/010_install_dependencies.sh
+    - name: Install NDK
+      run: ./github-actions/020_install_ndk_21e.sh
+    - name: Define build folders
+      run: ./vagrant/provision/030_define_build_folders.sh
+    - uses: actions/download-artifact@v2
+      with:
+        name: icu-armeabi-v7a
+        path: ~/libiconv-libicu-android/armeabi-v7a
+    - uses: actions/download-artifact@v2
+      with:
+        name: swift-android-5.4-armeabi-v7a
+        path: ~/out
+    - name: Unarchive toolchain
+      run: pushd ~/out; tar -xvf swift-android-5.4-armeabi-v7a.tar; popd
+    - uses: actions/download-artifact@v2
+      with:
+        name: foundation-dependecies-armeabi-v7a
+        path: ~/foundation-dependencies/arm
+    - name: Clone Swift
+      run: ./build/Linux/020-clone-swift.sh
+    - name: Build Corelibs
+      run: ./build/Linux/052-build-corelibs.sh arm armv7 armeabi-v7a
+    - name: Archive toolchain
+      run: pushd ~/out; tar -cvf swift-android-5.4-armeabi-v7a-with-corelibs.tar swift-android-5.4; popd
+    - uses: actions/upload-artifact@v2
+      with:
+        name: swift-android-5.4-armeabi-v7a-with-corelibs
+        path: ~/out/swift-android-5.4-armeabi-v7a-with-corelibs.tar
