@@ -413,12 +413,10 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-    - name: Install dependencies
-      run: sudo ./github-actions/010_install_dependencies.sh
-    - name: Install NDK
-      run: ./github-actions/020_install_ndk_21e.sh
     - name: Install Cmake and Ninja
       run: brew install cmake ninja pkg-config
+    - name: Install NDK
+      run: ./github-actions/020_install_ndk_21e.sh
     - name: Define build folders
       run: ./vagrant/provision/030_define_build_folders.sh
     - name: Clone Swift
