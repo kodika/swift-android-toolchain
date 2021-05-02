@@ -23,12 +23,6 @@ jobs:
       run: ./github-actions/020_install_ndk_16b.sh
     - name: Define build folders
       run: ./vagrant/provision/030_define_build_folders.sh
-    - name: Prepare cache sum
-      run: echo "ndk_16b" >> .cache.sum;
-        echo "$(git ls-remote -h https://github.com/readdle/libiconv-libicu-android.git refs/heads/swift-android-5.4-branch)" >> .cache.sum
-    - name: Echo cache sum
-      run: cat .cache.sum;
-        echo "${{ hashFiles('.cache.sum') }}"
     - name: Cache ICU
       id: cache-icu
       uses: actions/cache@v2
@@ -38,7 +32,7 @@ jobs:
           /home/runner/libiconv-libicu-android/armeabi-v7a
           /home/runner/libiconv-libicu-android/x86_64
           /home/runner/libiconv-libicu-android/x86
-        key: libiconv-libicu-android-${{ hashFiles('.cache.sum') }}
+        key: libiconv-1.15-icu4c-59_1-icu-le-hb-1.0.3-harfbuzz-1.4.6-ndk_16b
     - name: Build ICU
       if: steps.cache-icu.outputs.cache-hit != 'true'
       run: ./build/Linux/010-build-icu.sh
@@ -94,12 +88,14 @@ jobs:
         path: /home/runner/libiconv-libicu-android/arm64-v8a
     - name: Clone Swift
       run: ./build/Linux/020-clone-swift.sh
+    - name: Prepare swift sum
+      run: echo "$(git -C $HOME/swift-source rev-parse HEAD)" >> .swift.sum
     - name: Cache Swift Arm64
       id: cache-swift-arm-64
       uses: actions/cache@v2
       with:
         path: /home/runner/out/swift-android-5.4
-        key: ${{ runner.os }}-arm64-e1e3863
+        key: ${{ runner.os }}-arm64-${{ hashFiles('.swift.sum') }}
     - name: Build Swift
       if: steps.cache-swift-arm-64.outputs.cache-hit != 'true'
       run: ./build/Linux/031-build-swift-arm64.sh
@@ -129,12 +125,14 @@ jobs:
         path: /home/runner/libiconv-libicu-android/armeabi-v7a
     - name: Clone Swift
       run: ./build/Linux/020-clone-swift.sh
+    - name: Prepare swift sum
+      run: echo "$(git -C $HOME/swift-source rev-parse HEAD)" >> .swift.sum
     - name: Cache Swift Arm 32
       id: cache-swift-arm-32
       uses: actions/cache@v2
       with:
         path: /home/runner/out/swift-android-5.4
-        key: ${{ runner.os }}-arm32-e1e3863
+        key: ${{ runner.os }}-arm32-${{ hashFiles('.swift.sum') }}
     - name: Build Swift
       if: steps.cache-swift-arm-32.outputs.cache-hit != 'true'
       run: ./build/Linux/032-build-swift-arm.sh
@@ -164,12 +162,14 @@ jobs:
         path: /home/runner/libiconv-libicu-android/x86
     - name: Clone Swift
       run: ./build/Linux/020-clone-swift.sh
+    - name: Prepare swift sum
+      run: echo "$(git -C $HOME/swift-source rev-parse HEAD)" >> .swift.sum
     - name: Cache Swift x86
       id: cache-swift-x86
       uses: actions/cache@v2
       with:
         path: /home/runner/out/swift-android-5.4
-        key: ${{ runner.os }}-x86-e1e3863
+        key: ${{ runner.os }}-x86-${{ hashFiles('.swift.sum') }}
     - name: Build Swift
       if: steps.cache-swift-x86.outputs.cache-hit != 'true'
       run: ./build/Linux/034-build-swift-x86.sh
@@ -199,12 +199,14 @@ jobs:
         path: /home/runner/libiconv-libicu-android/x86_64
     - name: Clone Swift
       run: ./build/Linux/020-clone-swift.sh
+    - name: Prepare swift sum
+      run: echo "$(git -C $HOME/swift-source rev-parse HEAD)" >> .swift.sum
     - name: Cache Swift x86_64
       id: cache-swift-x86_64
       uses: actions/cache@v2
       with:
         path: /home/runner/out/swift-android-5.4
-        key: ${{ runner.os }}-x86_64-e1e3863
+        key: ${{ runner.os }}-x86_64-${{ hashFiles('.swift.sum') }}
     - name: Build Swift
       if: steps.cache-swift-x86_64.outputs.cache-hit != 'true'
       run: ./build/Linux/033-build-swift-x86_64.sh
