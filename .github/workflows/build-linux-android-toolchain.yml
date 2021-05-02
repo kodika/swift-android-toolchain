@@ -426,4 +426,5 @@ jobs:
         echo "export SWIFT_SRC=$swift_source" >> $HOME/.build_env
     - name: Clone Swift
       run: ./build/Linux/020-clone-swift.sh
-
+    - name: Build Swift
+      run: ./github-actions/010-build-swift.sh
