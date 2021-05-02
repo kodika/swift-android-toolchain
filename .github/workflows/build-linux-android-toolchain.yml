@@ -28,7 +28,7 @@ jobs:
         echo "$(git ls-remote -h https://github.com/readdle/libiconv-libicu-android.git refs/heads/swift-android-5.4-branch)" >> .cache.sum
     - name: Echo cache sum
       run: cat .cache.sum;
-        echo "{{ hashFiles('.cache.sum') }}"
+        echo "${{ hashFiles('.cache.sum') }}"
     - name: Cache ICU
       id: cache-icu
       uses: actions/cache@v2
@@ -38,7 +38,7 @@ jobs:
           /home/runner/libiconv-libicu-android/armeabi-v7a
           /home/runner/libiconv-libicu-android/x86_64
           /home/runner/libiconv-libicu-android/x86
-        key: $libiconv-libicu-android-{{ hashFiles('.cache.sum') }}
+        key: libiconv-libicu-android-${{ hashFiles('.cache.sum') }}
     - name: Build ICU
       if: steps.cache-icu.outputs.cache-hit != 'true'
       run: ./build/Linux/010-build-icu.sh
