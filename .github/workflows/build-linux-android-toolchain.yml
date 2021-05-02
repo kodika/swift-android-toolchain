@@ -409,7 +409,7 @@ jobs:
         path: ~/out/swift-android-5.4-x86_64-with-corelibs.tar
 
   build-swift-mac:
-    runs-on: macos-11.0
+    runs-on: macos-10.15
     
     steps:
     - uses: actions/checkout@v1
