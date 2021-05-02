@@ -417,7 +417,7 @@ jobs:
       run: brew install cmake ninja pkg-config
     - name: Prepare Python
       run: python --version; 
-        curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py;
+        curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py;
         python get-pip.py;
         pip install six
     - name: Install NDK
