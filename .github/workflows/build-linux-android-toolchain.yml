@@ -413,8 +413,10 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-    - name: Install Cmake and Ninja
-      run: brew install cmake ninja pkg-config
+    - name: Install Cmake, Ninja, pip
+      run: brew install cmake ninja pkg-config pip
+    - name: Prepare Python
+      run: python --version; pip install six
     - name: Install NDK
       run: wget https://dl.google.com/android/repository/android-ndk-r21e-darwin-x86_64.zip;
         unzip android-ndk-r21e-darwin-x86_64.zip;
