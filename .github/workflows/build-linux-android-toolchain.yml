@@ -36,7 +36,7 @@ jobs:
           /home/runner/libiconv-libicu-android/armeabi-v7a
           /home/runner/libiconv-libicu-android/x86_64
           /home/runner/libiconv-libicu-android/x86
-        key: ${{ runner.os }}-{{ env.LIBICONV_LIBICU_ANDROID_SHA }}
+        key: ${{ runner.os }}-{{ LIBICONV_LIBICU_ANDROID_SHA }}
     - name: Build ICU
       if: steps.cache-icu.outputs.cache-hit != 'true'
       run: ./build/Linux/010-build-icu.sh
