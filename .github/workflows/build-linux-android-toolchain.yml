@@ -23,6 +23,10 @@ jobs:
       run: ./github-actions/020_install_ndk_16b.sh
     - name: Define build folders
       run: ./vagrant/provision/030_define_build_folders.sh
+    - name: Get repo SHA
+      run: sha=$(git ls-remote -h https://github.com/readdle/libiconv-libicu-android.git refs/heads/swift-android-5.4-branch | cut -c1-7); echo $sha
+    - name: Echo SHA
+      run: echo $sha
     - name: Cache ICU
       id: cache-icu
       uses: actions/cache@v2
