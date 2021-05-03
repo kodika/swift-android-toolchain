@@ -21,5 +21,5 @@ rsync -av $SWIFT_SRC/build/Ninja-ReleaseAssert+stdlib-Release/swift-macosx-x86_6
         --exclude '*'
 
 pushd $HOME
-    tar -cvf swift-android-$name-bin.tar toolchain-bin
+    tar -cvf $name-bin.tar toolchain-bin
 popd
