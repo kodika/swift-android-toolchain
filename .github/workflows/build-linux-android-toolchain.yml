@@ -374,7 +374,7 @@ jobs:
       run: ./build/Linux/052-build-corelibs.sh x86 i686 x86
     - uses: actions/upload-artifact@v2
       with:
-        name: swift-android-5.4-armeabi-v7a-libs
+        name: swift-android-5.4-x86-libs
         path: ~/out/swift-android-5.4/swift-nightly-install/usr/lib/swift-i686
 
   build-swift-corelibs-x86_64:
@@ -409,7 +409,7 @@ jobs:
       run: ./build/Linux/052-build-corelibs.sh x86_64 x86_64 x86_64
     - uses: actions/upload-artifact@v2
       with:
-        name: swift-android-5.4-armeabi-v7a-libs
+        name: swift-android-5.4-x86_64-libs
         path: ~/out/swift-android-5.4/swift-nightly-install/usr/lib/swift-x86_64
 
   build-swift-mac:
