@@ -459,3 +459,39 @@ jobs:
       with:
         name: swift-android-5.4-bin
         path: ~/swift-android-5.4-bin.tar
+
+
+  collect-toolchain:
+    needs: [build-swift-mac, build-swift-corelibs-arm-64, build-swift-corelibs-armeabi-v7a, build-swift-corelibs-x86_64, build-swift-corelibs-x86]
+    runs-on: ubuntu-20.04
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install NDK
+      run: ./github-actions/020_install_ndk_21e.sh
+    - uses: actions/download-artifact@v2
+      with:
+        name: build-swift-mac
+        path: ~/
+    - uses: actions/download-artifact@v2
+      with:
+        name: build-swift-corelibs-arm-64
+        path: ~/
+    - uses: actions/download-artifact@v2
+      with:
+        name: build-swift-corelibs-armeabi-v7a
+        path: ~/
+    - uses: actions/download-artifact@v2
+      with:
+        name: build-swift-corelibs-x86_64
+        path: ~/
+    - uses: actions/download-artifact@v2
+      with:
+        name: build-swift-corelibs-x86
+        path: ~/
+    - name: Collect toolchain
+      run: ./github-actions/030-collect-toolchain.sh
+    - uses: actions/upload-artifact@v2
+      with:
+        name: swift-android-5.4
+        path: ~/out/swift-android-5.4.zip
