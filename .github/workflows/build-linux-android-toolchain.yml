@@ -439,7 +439,21 @@ jobs:
         echo "export SWIFT_SRC=$swift_source" >> $HOME/.build_env
     - name: Clone Swift
       run: ./build/Linux/020-clone-swift.sh
+    - name: Prepare swift sum
+      run: echo "$(git -C $HOME/swift-source rev-parse HEAD)" >> .swift.sum
+    - name: Cache Swift Mac
+      id: cache-swift-mac
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/swift-source/build/Ninja-ReleaseAssert+stdlib-Release/swift-macosx-x86_64
+          ~/swift-source/swiftpm/.build/release/swift-build
+          /usr/local/bin/pkg-config
+          /usr/local/bin/ninja
+        key: ${{ runner.os }}-x86_64-${{ hashFiles('.swift.sum') }}
     - name: Build Swift
+      if: steps.cache-swift-mac.outputs.cache-hit != 'true'
       run: ./github-actions/010-build-swift.sh
     - name: Build Swift PM
+      if: steps.cache-swift-mac.outputs.cache-hit != 'true'
       run: ./github-actions/020-build-swiftpm.sh
