@@ -457,3 +457,9 @@ jobs:
     - name: Build Swift PM
       if: steps.cache-swift-mac.outputs.cache-hit != 'true'
       run: ./github-actions/020-build-swiftpm.sh
+    - name: Collect toolchain binn
+      run: ./github-actions/030-collect-toolchain-bin.sh
+    - uses: actions/upload-artifact@v2
+      with:
+        name: swift-android-5.4-bin
+        path: ~/swift-android-5.4-bin.tar
