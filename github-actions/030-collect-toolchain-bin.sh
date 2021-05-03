@@ -7,7 +7,6 @@ toolchain_version=`cat build/config/version`
 name=swift-android-$toolchain_version
 
 out_bin=~/toolchain-bin
-out_bin=`realpath $out_bin`
 mkdir -p $out_bin
 
 cp -f /usr/local/bin/pkg-config $out_bin
