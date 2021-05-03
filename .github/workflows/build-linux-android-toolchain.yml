@@ -441,3 +441,5 @@ jobs:
       run: ./build/Linux/020-clone-swift.sh
     - name: Build Swift
       run: ./github-actions/010-build-swift.sh
+    - name: Build Swift PM
+      run: ./github-actions/020-build-swiftpm.sh
