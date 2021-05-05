@@ -13,6 +13,14 @@ mkdir -p $out
 mkdir -p $out_toolchain
 mkdir -p $out_bin
 
+ls -la $HOME
+pushd $HOME/toolchain-bin; ls -la; popd
+pushd $HOME/swift-android-5.4-arm64-v8a-libs; ls -la; popd
+pushd $HOME/swift-android-5.4-armeabi-v7a-libs; ls -la; popd
+pushd $HOME/swift-android-5.4-x86-libs; ls -la; popd
+pushd $HOME/swift-android-5.4-x86_64-libs; ls -la; popd
+pushd $HOME/swift-android-5.4-clang-libs; ls -la; popd
+
 input_bin=$HOME/toolchain-bin
 input_arm64-v8a_libs=$HOME/swift-android-5.4-arm64-v8a-libs
 input_armeabi-v7a_libs=$HOME/swift-android-5.4-armeabi-v7a-libs
