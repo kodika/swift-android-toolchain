@@ -1,6 +1,8 @@
 #!/bin/bash
 set -ex
 
+source $HOME/.build_env
+
 toolchain_version=`cat build/config/version`
 name=swift-android-$toolchain_version
 
