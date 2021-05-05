@@ -4,7 +4,7 @@ set -ex
 toolchain_version=`cat build/config/version`
 name=swift-android-$toolchain_version
 
-out=out/$name
+out=$HOME/out/$name
 out_toolchain=$out/toolchain
 out_bin=$out_toolchain/usr/bin
 out_lib=$out_toolchain/usr/lib
