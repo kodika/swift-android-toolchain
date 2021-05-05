@@ -45,6 +45,9 @@ pushd $out
     # Patch Glibc module
     for swift_arch in aarch64 armv7 x86_64 i686
     do
+        ls -la $out_toolchain/usr/lib/
+        ls -la $out_toolchain/usr/lib/swift-$swift_arch/android/
+        ls -la $out_toolchain/usr/lib/swift-$swift_arch/android/$swift_arch
         glibc_modulemap="$out_toolchain/usr/lib/swift-$swift_arch/android/$swift_arch/glibc.modulemap"
 
         if [[ ! -f "$glibc_modulemap.orig" ]]
