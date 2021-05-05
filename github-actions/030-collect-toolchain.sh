@@ -13,11 +13,7 @@ mkdir -p $out
 mkdir -p $out_toolchain
 mkdir -p $out_bin
 
-pushd $HOME
-    tar -xvf swift-android-5.4-bin.tar
-popd
-
-input_bin=~/swift-android-5.4-bin
+input_bin=~/toolchain-bin
 input_arm64-v8a_libs=~/swift-android-5.4-arm64-v8a-libs
 input_armeabi-v7a_libs=~/swift-android-5.4-armeabi-v7a-libs
 input_x86_libs=~/swift-android-5.4-x86-libs
@@ -27,13 +23,7 @@ input_clang_libs=~/swift-android-5.4-clang-libs
 pushd $linux_out
     mkdir -p usr/bin
 
-    rsync -av $input_bin $out_bin \
-        --include swift \
-        --include swift-autolink-extract \
-        --include swift-stdlib-tool \
-        --include swiftc \
-        --include swift-frontend \
-        --exclude '*'
+    rsync -av $input_bin $out_bin
 
     rsync -av $input_clang_libs $out_lib \
         --exclude '/lib' \
