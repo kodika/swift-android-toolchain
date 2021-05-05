@@ -22,8 +22,8 @@ pushd $HOME/swift-android-5.4-x86_64-libs; ls -la; popd
 pushd $HOME/swift-android-5.4-clang-libs; ls -la; popd
 
 input_bin=$HOME/toolchain-bin
-input_arm64-v8a_libs=$HOME/swift-android-5.4-arm64-v8a-libs
-input_armeabi-v7a_libs=$HOME/swift-android-5.4-armeabi-v7a-libs
+input_arm64_v8a_libs=$HOME/swift-android-5.4-arm64-v8a-libs
+input_armeabi_v7a_libs=$HOME/swift-android-5.4-armeabi-v7a-libs
 input_x86_libs=$HOME/swift-android-5.4-x86-libs
 input_x86_64_libs=$HOME/swift-android-5.4-x86_64-libs
 input_clang_libs=$HOME/swift-android-5.4-clang-libs
@@ -34,10 +34,10 @@ pushd $linux_out
     rsync -av $input_bin $out_bin
 
     rsync -av $input_clang_libs $out_lib \
-        --exclude '/lib' \
+        --exclude '/10.0.0/lib' \
 
-    rsync -av $input_arm64-v8a_libs $out_lib
-    rsync -av $input_armeabi-v7a_libs $out_lib
+    rsync -av $input_arm64_v8a_libs $out_lib
+    rsync -av $input_armeabi_v7a_libs $out_lib
     rsync -av $input_x86_libs $out_lib
     rsync -av $input_x86_64_libs $out_lib
 

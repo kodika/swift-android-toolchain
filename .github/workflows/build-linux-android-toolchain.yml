@@ -494,7 +494,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: swift-android-5.4-clang-libs
-        path: ~/swift-android-5.4-clang-libs
+        path: ~/swift-android-5.4-clang-libs/clang
     - name: Collect toolchain
       run: ./github-actions/030-collect-toolchain.sh
     - uses: actions/upload-artifact@v2
