@@ -478,19 +478,19 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: swift-android-5.4-arm64-v8a-libs
-        path: ~/swift-android-5.4-arm64-v8a-libs
+        path: ~/swift-android-5.4-arm64-v8a-libs/swift-aarch64
     - uses: actions/download-artifact@v2
       with:
         name: swift-android-5.4-armeabi-v7a-libs
-        path: ~/swift-android-5.4-armeabi-v7a-libs
+        path: ~/swift-android-5.4-armeabi-v7a-libs/swift-armv7
     - uses: actions/download-artifact@v2
       with:
         name: swift-android-5.4-x86_64-libs
-        path: ~/swift-android-5.4-x86_64-libs
+        path: ~/swift-android-5.4-x86_64-libs/swift-x86_64
     - uses: actions/download-artifact@v2
       with:
         name: swift-android-5.4-x86-libs
-        path: ~/swift-android-5.4-x86-libs
+        path: ~/swift-android-5.4-x86-libs/swift-i686
     - uses: actions/download-artifact@v2
       with:
         name: swift-android-5.4-clang-libs
