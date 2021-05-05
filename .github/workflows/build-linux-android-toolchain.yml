@@ -472,7 +472,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: swift-android-5.4-bin
-        path: ~/swift-android-5.4-bin
+        path: ~/
     - uses: actions/download-artifact@v2
       with:
         name: swift-android-5.4-arm64-v8a-libs
