@@ -13,12 +13,12 @@ mkdir -p $out
 mkdir -p $out_toolchain
 mkdir -p $out_bin
 
-input_bin=~/toolchain-bin
-input_arm64-v8a_libs=~/swift-android-5.4-arm64-v8a-libs
-input_armeabi-v7a_libs=~/swift-android-5.4-armeabi-v7a-libs
-input_x86_libs=~/swift-android-5.4-x86-libs
-input_x86_64_libs=~/swift-android-5.4-x86_64-libs
-input_clang_libs=~/swift-android-5.4-clang-libs
+input_bin=$HOME/toolchain-bin
+input_arm64-v8a_libs=$HOME/swift-android-5.4-arm64-v8a-libs
+input_armeabi-v7a_libs=$HOME/swift-android-5.4-armeabi-v7a-libs
+input_x86_libs=$HOME/swift-android-5.4-x86-libs
+input_x86_64_libs=$HOME/swift-android-5.4-x86_64-libs
+input_clang_libs=$HOME/swift-android-5.4-clang-libs
 
 pushd $linux_out
     mkdir -p usr/bin
