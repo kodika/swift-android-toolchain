@@ -12,14 +12,7 @@ out_lib=$out_toolchain/usr/lib
 mkdir -p $out
 mkdir -p $out_toolchain
 mkdir -p $out_bin
-
-ls -la $HOME
-pushd $HOME/toolchain-bin; ls -la; popd
-pushd $HOME/swift-android-5.4-arm64-v8a-libs; ls -la; popd
-pushd $HOME/swift-android-5.4-armeabi-v7a-libs; ls -la; popd
-pushd $HOME/swift-android-5.4-x86-libs; ls -la; popd
-pushd $HOME/swift-android-5.4-x86_64-libs; ls -la; popd
-pushd $HOME/swift-android-5.4-clang-libs; ls -la; popd
+mkdir -p $out_lib
 
 input_bin=$HOME/toolchain-bin
 input_arm64_v8a_libs=$HOME/swift-android-5.4-arm64-v8a-libs
@@ -28,23 +21,26 @@ input_x86_libs=$HOME/swift-android-5.4-x86-libs
 input_x86_64_libs=$HOME/swift-android-5.4-x86_64-libs
 input_clang_libs=$HOME/swift-android-5.4-clang-libs
 
-pushd $linux_out
-    mkdir -p usr/bin
+pushd $out
 
+    # Copy binn from mac os toolchain
     rsync -av $input_bin $out_bin
 
+    # Copy clanng headers
     rsync -av $input_clang_libs $out_lib \
         --exclude '/10.0.0/lib' \
 
+    # Copy platform libraries
     rsync -av $input_arm64_v8a_libs $out_lib
     rsync -av $input_armeabi_v7a_libs $out_lib
     rsync -av $input_x86_libs $out_lib
     rsync -av $input_x86_64_libs $out_lib
 
-    ## Bundle NDK headers and patch glibc
+    # Bundle NDK headers
     mkdir -p $out_toolchain/ndk-android-21/usr
     rsync -av $ANDROID_NDK/sysroot/usr/include $out_toolchain/ndk-android-21/usr
 
+    # Patch Glibc module
     for swift_arch in aarch64 armv7 x86_64 i686
     do
         glibc_modulemap="$out_toolchain/usr/lib/swift-$swift_arch/android/$swift_arch/glibc.modulemap"
