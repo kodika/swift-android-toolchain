@@ -25,8 +25,11 @@ pushd $out
     rsync -av $input_bin $out_bin
 
     # Copy platform libs
-    rsync -av $input_libs $out_lib \
-        --exclude 'clang/10.0.0/lib' \
+    rsync -av $input_libs/clang $out_lib --exclude 'clang/10.0.0/lib'
+    rsync -av $input_libs/swift-aarch64 $out_lib
+    rsync -av $input_libs/swift-armv7 $out_lib
+    rsync -av $input_libs/swift-i686 $out_lib
+    rsync -av $input_libs/swift-x86_64 $out_lib
 
     # Bundle NDK headers
     mkdir -p $out_toolchain/ndk-android-21/usr
