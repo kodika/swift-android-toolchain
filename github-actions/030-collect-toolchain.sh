@@ -17,26 +17,16 @@ mkdir -p $out_bin
 mkdir -p $out_lib
 
 input_bin=$HOME/toolchain-bin
-input_arm64_v8a_libs=$HOME/swift-android-5.4-arm64-v8a-libs
-input_armeabi_v7a_libs=$HOME/swift-android-5.4-armeabi-v7a-libs
-input_x86_libs=$HOME/swift-android-5.4-x86-libs
-input_x86_64_libs=$HOME/swift-android-5.4-x86_64-libs
-input_clang_libs=$HOME/swift-android-5.4-clang-libs
+input_libs=$HOME/swift-android-5.4-libs
 
 pushd $out
 
-    # Copy binn from mac os toolchain
+    # Copy bin from mac os toolchain
     rsync -av $input_bin $out_bin
 
-    # Copy clanng headers
-    rsync -av $input_clang_libs $out_lib \
-        --exclude '/10.0.0/lib' \
-
-    # Copy platform libraries
-    rsync -av $input_arm64_v8a_libs $out_lib
-    rsync -av $input_armeabi_v7a_libs $out_lib
-    rsync -av $input_x86_libs $out_lib
-    rsync -av $input_x86_64_libs $out_lib
+    # Copy platform libs
+    rsync -av $input_libs $out_lib \
+        --exclude 'clang/10.0.0/lib' \
 
     # Bundle NDK headers
     mkdir -p $out_toolchain/ndk-android-21/usr
