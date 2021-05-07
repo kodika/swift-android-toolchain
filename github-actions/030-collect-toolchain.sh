@@ -52,7 +52,7 @@ pushd $out
     done
 popd
 
-rsync -av shims/`uname`/ $out_toolchain
+rsync -av shims/Darwin/ $out_toolchain
 rsync -av src/tools/ $out
 
 echo $toolchain_version > $out/VERSION
