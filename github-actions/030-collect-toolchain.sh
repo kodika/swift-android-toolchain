@@ -8,28 +8,20 @@ name=swift-android-$toolchain_version
 
 out=$HOME/out/$name
 out_toolchain=$out/toolchain
-out_bin=$out_toolchain/usr/bin
-out_lib=$out_toolchain/usr/lib
 
 mkdir -p $out
 mkdir -p $out_toolchain
-mkdir -p $out_bin
-mkdir -p $out_lib
 
-input_bin=$HOME/toolchain-bin
-input_libs=$HOME/swift-android-5.4-libs
+input_bin=$HOME/bin
+input_libs=$HOME/lib
 
 pushd $out
 
     # Copy bin from mac os toolchain
-    rsync -av $input_bin $out_bin
-
+    rsync -av $input_bin $out_toolchain
+    
     # Copy platform libs
-    rsync -av $input_libs/clang $out_lib --exclude 'clang/10.0.0/lib'
-    rsync -av $input_libs/swift-aarch64 $out_lib
-    rsync -av $input_libs/swift-armv7 $out_lib
-    rsync -av $input_libs/swift-i686 $out_lib
-    rsync -av $input_libs/swift-x86_64 $out_lib
+    rsync -av $input_libs $out_toolchain --exclude 'lib/clang/10.0.0/lib'
 
     # Bundle NDK headers
     mkdir -p $out_toolchain/ndk-android-21/usr

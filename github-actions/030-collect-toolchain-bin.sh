@@ -6,7 +6,7 @@ source $HOME/.build_env
 toolchain_version=`cat build/config/version`
 name=swift-android-$toolchain_version
 
-out_bin=~/toolchain-bin
+out_bin=~/bin
 mkdir -p $out_bin
 
 cp -f /usr/local/bin/pkg-config $out_bin
@@ -21,5 +21,5 @@ rsync -av $SWIFT_SRC/build/Ninja-ReleaseAssert+stdlib-Release/swift-macosx-x86_6
         --exclude '*'
 
 pushd $HOME
-    tar -cvf $name-bin.tar toolchain-bin
+    tar -cvf $name-bin.tar bin
 popd
