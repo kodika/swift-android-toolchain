@@ -11,6 +11,7 @@ out_toolchain=$out/toolchain
 
 mkdir -p $out
 mkdir -p $out_toolchain
+mkdir -p $out_toolchain/usr
 
 input_bin=$HOME/bin
 input_libs=$HOME/lib
@@ -18,10 +19,10 @@ input_libs=$HOME/lib
 pushd $out
 
     # Copy bin from mac os toolchain
-    rsync -av $input_bin $out_toolchain
-    
+    rsync -av $input_bin $out_toolchain/usr
+
     # Copy platform libs
-    rsync -av $input_libs $out_toolchain --exclude 'lib/clang/10.0.0/lib'
+    rsync -av $input_libs $out_toolchain/usr --exclude 'lib/clang/10.0.0/lib'
 
     # Bundle NDK headers
     mkdir -p $out_toolchain/ndk-android-21/usr
