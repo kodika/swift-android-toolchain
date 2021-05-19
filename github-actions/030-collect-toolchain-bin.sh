@@ -11,6 +11,7 @@ mkdir -p $out_bin
 
 cp -f /usr/local/bin/pkg-config $out_bin
 cp -f /usr/local/bin/ninja $out_bin
+cp -f $SWIFT_SRC/swiftpm/.build/release/swift-build $out_bin
 
 rsync -av $SWIFT_SRC/build/Ninja-ReleaseAssert+stdlib-Release/swift-macosx-x86_64/bin/ $out_bin \
         --include swift \
