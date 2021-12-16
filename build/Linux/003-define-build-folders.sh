@@ -23,3 +23,4 @@ echo "export FOUNDATION_DEPENDENCIES=\$HOME/foundation-dependencies" >> .build_e
 echo "export DISPATCH_SRC=\$SWIFT_SRC/swift-corelibs-libdispatch" >> .build_env
 echo "export FOUNDATION_SRC=\$SWIFT_SRC/swift-corelibs-foundation" >> .build_env
 echo "export XCTEST_SRC=\$SWIFT_SRC/swift-corelibs-xctest" >> .build_env
+echo "export CRYPTO_SRC=\$SWIFT_SRC/swift-crypto" >> .build_env

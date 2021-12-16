@@ -10,6 +10,9 @@ pushd $SWIFT_SRC
     git clone https://github.com/apple/swift.git --branch $BRANCH --single-branch
     swift/utils/update-checkout --clone --scheme $BRANCH
 
+    # Clone swift-crypto
+    git clone https://github.com/apple/swift-crypto.git --branch 2.0.2 --single-branch
+
     # Replace Apple foundation with Readdle's fork
     rm -rf swift-corelibs-foundation
     git clone https://github.com/readdle/swift-corelibs-foundation.git --branch readdle/$BRANCH --single-branch
