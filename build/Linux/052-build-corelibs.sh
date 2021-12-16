@@ -19,6 +19,7 @@ abi=$3 # arm64-v8a armeabi-v7a x86 x86_64
 dispatch_build_dir=/tmp/swift-corelibs-libdispatch-$arch
 foundation_build_dir=/tmp/foundation-$arch
 xctest_build_dir=/tmp/xctest-$arch
+crypto_build_dir=/tmp/swift-crypto-$arch
 
 foundation_dependencies=$FOUNDATION_DEPENDENCIES/$arch
 icu_libs=$ICU_LIBS/$abi
@@ -26,10 +27,12 @@ icu_libs=$ICU_LIBS/$abi
 rm -rf $dispatch_build_dir
 rm -rf $foundation_build_dir
 rm -rf $xctest_build_dir
+rm -rf $crypto_build_dir
 
 mkdir -p $dispatch_build_dir
 mkdir -p $foundation_build_dir
 mkdir -p $xctest_build_dir
+mkdir -p $crypto_build_dir
 
 ln -sfn $DST_ROOT/swift-nightly-install/usr/lib/swift-$swift_arch $DST_ROOT/swift-nightly-install/usr/lib/swift
 
@@ -82,6 +85,17 @@ pushd $xctest_build_dir
     cmake --build $xctest_build_dir
 popd
 
+pushd $crypto_build_dir
+    cmake $CRYPTO_SRC \
+        -G Ninja \
+        -C $self_dir/common-flags.cmake \
+        -C $self_dir/common-flags-$arch.cmake \
+        -Ddispatch_DIR=$dispatch_build_dir/cmake/modules \
+        -DFoundation_DIR=$foundation_build_dir/cmake/modules
+
+    cmake --build $crypto_build_dir
+popd
+
 dispatch_build_dir=/tmp/swift-corelibs-libdispatch-$arch
 foundation_build_dir=/tmp/foundation-$arch
 xctest_build_dir=/tmp/xctest-$arch
@@ -92,6 +106,7 @@ ln -sfn $DST_ROOT/swift-nightly-install/usr/lib/swift-$swift_arch $DST_ROOT/swif
 cmake --build $dispatch_build_dir --target install
 cmake --build $foundation_build_dir --target install
 cmake --build $xctest_build_dir --target install
+cmake --build $crypto_build_dir --target install
 
 # Copy dependency headers and libraries
 swift_include=$DST_ROOT/swift-nightly-install/usr/lib/swift-$swift_arch
